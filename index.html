@@ -27,19 +27,23 @@
     }
 
     header{
-      padding: 22px 12px 12px;
+      padding: 20px 12px 12px;
       text-align:center;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(8,24,24,0.65);
+      border-bottom: 1px solid rgba(212,175,55,0.22);
+      z-index: 10;
     }
     h1{
       margin:0;
       color: var(--gold);
-      letter-spacing: 1.2px;
+      letter-spacing: 1.1px;
       font-size: clamp(18px, 4.6vw, 28px);
     }
     .meta{
-      margin-top: 8px;
-      opacity: .9;
-      font-size: 13px;
+      margin-top: 10px;
       display:flex;
       gap:10px;
       justify-content:center;
@@ -55,12 +59,12 @@
     }
 
     .wrap{
-      padding: 10px 10px 64px;
-      max-width: 880px;
+      padding: 10px 10px 72px;
+      max-width: 920px;
       margin: 0 auto;
     }
 
-    /* Cards (smaller) */
+    /* Card */
     .card{
       background: linear-gradient(180deg, var(--card2), var(--card));
       border:1px solid rgba(212,175,55,0.55);
@@ -70,7 +74,7 @@
       backdrop-filter: blur(8px);
       text-align:center;
       width: 100%;
-      max-width: 520px;
+      max-width: 560px;
       margin: 0 auto;
       position: relative;
     }
@@ -97,6 +101,7 @@
       font-size: 12px;
       opacity: .88;
       line-height: 1.35;
+      word-break: break-word;
     }
 
     /* Couple row */
@@ -107,7 +112,7 @@
       justify-content: center;
       flex-wrap: nowrap;
     }
-    .couple .card{ max-width: 330px; }
+    .couple .card{ max-width: 360px; }
     .dash{
       display:grid;
       place-items:center;
@@ -119,17 +124,17 @@
 
     .trunk{
       width: 2px;
-      height: 24px;
+      height: 22px;
       background: var(--line);
       margin: 12px auto;
       border-radius: 999px;
     }
 
-    /* Children sections: SAME generation -> each is a section (flow) */
+    /* Sections */
     .children-sections{
       display:flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
     .section{
       position: relative;
@@ -142,7 +147,7 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: rgba(212,175,55,0.30);
+      background: rgba(212,175,55,0.28);
       border-radius: 999px;
     }
     .dot{
@@ -155,14 +160,76 @@
       top: 14px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.35);
     }
-    .gen-label{
+
+    /* Collapsible blocks */
+    details{
+      border: 1px solid rgba(212,175,55,0.28);
+      border-radius: 14px;
+      background: rgba(0,0,0,0.12);
+      padding: 8px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      user-select:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+
+    .sum-left{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      text-align:left;
+      min-width: 0;
+    }
+    .sum-title{
+      font-weight:800;
+      color: var(--ivory);
+      font-size: 13px;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 52vw;
+    }
+    .sum-sub{
       font-size: 11px;
-      opacity: .75;
-      margin: 0 0 6px 0;
-      letter-spacing: .35px;
+      opacity:.78;
+    }
+    .sum-right{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
-    /* Kids list under a person */
+    .btn{
+      border:1px solid rgba(212,175,55,0.55);
+      background: rgba(0,0,0,0.18);
+      color: var(--ivory);
+      padding: 7px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:800;
+      font-size: 12px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .btn:hover{ background: rgba(245,239,225,0.10); }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(212,175,55,0.24), rgba(212,175,55,0.12));
+      border-color: rgba(212,175,55,0.75);
+    }
+    .btn.danger{
+      border-color: rgba(255,120,120,0.55);
+      background: rgba(255,120,120,0.10);
+    }
+
+    /* nested children list */
     .kids{
       margin-top: 10px;
       padding-left: 10px;
@@ -181,67 +248,15 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: rgba(212,175,55,0.28);
+      background: rgba(212,175,55,0.24);
       border-radius: 999px;
-    }
-
-    /* Collapsible (super iPhone-friendly) */
-    details{
-      border: 1px solid rgba(212,175,55,0.28);
-      border-radius: 14px;
-      background: rgba(0,0,0,0.12);
-      padding: 8px;
-    }
-    summary{
-      cursor:pointer;
-      list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      user-select:none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    .sum-left{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      text-align:left;
-    }
-    .sum-title{
-      font-weight:800;
-      color: var(--ivory);
-      font-size: 13px;
-    }
-    .sum-sub{
-      font-size: 11px;
-      opacity:.78;
-    }
-    .sum-right{
-      display:flex; gap:8px; align-items:center;
-    }
-
-    .btn{
-      border:1px solid rgba(212,175,55,0.55);
-      background: rgba(0,0,0,0.18);
-      color: var(--ivory);
-      padding: 7px 10px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-weight:700;
-      font-size: 12px;
-    }
-    .btn:hover{ background: rgba(245,239,225,0.10); }
-    .btn.primary{
-      background: linear-gradient(180deg, rgba(212,175,55,0.24), rgba(212,175,55,0.12));
-      border-color: rgba(212,175,55,0.75);
     }
 
     footer{
       text-align:center;
       font-size: 12px;
       opacity: .6;
-      padding: 18px 12px 34px;
+      padding: 18px 12px 36px;
     }
 
     @media (max-width: 420px){
@@ -249,6 +264,7 @@
       .name{ font-size: 13.5px; }
       .card{ padding: 9px 10px; }
       .wrap{ padding-left: 8px; padding-right: 8px; }
+      .sum-title{ max-width: 44vw; }
     }
   </style>
 </head>
@@ -264,207 +280,217 @@
 
   <main class="wrap" id="app"></main>
 
-  <footer>✶ Dilediğin zaman kişi ekleyebilir / düzenleyebilirsin ✶</footer>
+  <footer>✶ Her yerde kişi / eş / çocuk / ebeveyn ekleyebilirsin ✶</footer>
 
   <script>
-    // --------- Data (Default) ----------
-    // Not: Bu yapı aynı sistemle büyür: kişi -> eş -> çocuklar
+    // ------------------ DEFAULT DATA (DÜZELTİLMİŞ) ------------------
     const DEFAULT_TREE = {
       id: "root",
-      person: "Opa Niyazi Tuncay",
-      spouse: "Oma Elmas Tuncay",
+      person: "Niyazi Tuncay",
+      spouse: "Elmas Tuncay",
+      note: "",
       children: [
+        // 1) Ayşegül
         {
           id: "ays",
           person: "Ayşegül Tuncay",
-          spouse: "", // boş = yazdırma
+          spouse: "Yunus Coşkun",
           note: "Boşanmış",
           children: [
             {
               id: "umm",
               person: "Ümmühan Akar",
               spouse: "Muammer Akar",
+              note: "",
               children: [
-                { id: "osma", person: "Osman Akar", spouse: "", children: [] },
-                { id: "musa", person: "Musa Akar", spouse: "", children: [] },
-                { id: "mery", person: "Meryem Akar", spouse: "", children: [] },
-                { id: "yusu", person: "Yusuf Akar", spouse: "", children: [] },
+                { id: "osma", person: "Osman Akar", spouse: "", note: "", children: [] },
+                { id: "musa", person: "Musa Akar", spouse: "", note: "", children: [] },
+                { id: "mery", person: "Meryem Akar", spouse: "", note: "", children: [] },
+                { id: "yusu", person: "Yusuf Akar", spouse: "", note: "", children: [] },
               ]
             },
             {
-              id: "sem",
-              person: "Semra",
-              spouse: "Turan",
+              id: "semra",
+              person: "Semra Üşümez",
+              spouse: "Turan Üşümez",
+              note: "",
               children: [
-                // Kullanıcının isteği: "Baran" iki A — yazımı sen düzenleyebilirsin
-                { id: "bara", person: "Baraan Kan", spouse: "", children: [] }
+                { id: "baran", person: "Baran Kan Üşümez", spouse: "", note: "", children: [] }
               ]
             }
           ]
         },
 
+        // 2) Hüseyin
         {
-  id: "hus",
-  person: "Hüseyin Ayhan Tuncay",
-  spouse: "Aynur Tuncay",
-  children: [
-    {
-      id: "ibr",
-      person: "İbrahim Tuncay",
-      spouse: "Betül Tuncay",
-      children: [
-        { id: "miray", person: "Miray Tuncay", spouse: "", children: [] }
-      ]
-    },
-    {
-      id: "elifb",
-      person: "Elif Bahtiyar",
-      spouse: "Samet Bahtiyar",
-      children: [
-        { id: "ahsen", person: "Ahsen Bahtiyar", spouse: "", children: [] },
-        { id: "zeynep", person: "Zeynep Bahtiyar", spouse: "", children: [] }
-      ]
-    },
-    {
-      id: "kemal",
-      person: "Kemal Tuncay",
-      spouse: "Selan Tuncay",
-      children: []
-    }
-  ]
-
+          id: "hus",
+          person: "Hüseyin Ayhan Tuncay",
+          spouse: "Aynur Tuncay",
+          note: "",
+          children: [
             {
-              id: "kem",
+              id: "ibr",
+              person: "İbrahim Tuncay",
+              spouse: "Betül Tuncay",
+              note: "",
+              children: [
+                { id: "miray", person: "Miray Tuncay", spouse: "", note: "", children: [] }
+              ]
+            },
+            {
+              id: "elifb",
+              person: "Elif Bahtiyar",
+              spouse: "Samet Bahtiyar",
+              note: "",
+              children: [
+                { id: "ahsen", person: "Ahsen Bahtiyar", spouse: "", note: "", children: [] },
+                { id: "zeynep", person: "Zeynep Bahtiyar", spouse: "", note: "", children: [] }
+              ]
+            },
+            {
+              id: "kemal",
               person: "Kemal Tuncay",
-              spouse: "— (manuel girilecek)",
+              spouse: "Selan Tuncay",
+              note: "",
               children: []
             }
           ]
         },
 
-        // 3) Hasan Orhan (senin önceki ağaç kısmın buraya alındı)
+        // 3) Hasan Orhan (önceki ağaç buraya alındı)
         {
           id: "has",
           person: "Hasan Orhan Tuncay",
           spouse: "Neriman Tuncay",
+          note: "",
           children: [
             {
               id: "niy",
               person: "Niyazi Tuncay",
               spouse: "Derya Tuncay",
+              note: "",
               children: [
-                { id: "fatihE", person: "Fatih Eren Tuncay", spouse: "", children: [] },
-                { id: "asya", person: "Asya Tuncay", spouse: "", children: [] }
+                { id: "fatihE", person: "Fatih Eren Tuncay", spouse: "", note: "", children: [] },
+                { id: "asya", person: "Asya Tuncay", spouse: "", note: "", children: [] }
               ]
             },
             {
               id: "ulku",
               person: "Ülkü Efe",
               spouse: "Ertan Efe",
+              note: "",
               children: [
-                { id: "hamza", person: "Hamza Ali Efe", spouse: "", children: [] }
+                { id: "hamza", person: "Hamza Ali Efe", spouse: "", note: "", children: [] }
               ]
             },
             {
               id: "ugur",
               person: "Uğur Tuncay",
               spouse: "Tuğba Tuncay Yumuşakgeyle",
+              note: "",
               children: []
             },
             {
               id: "hakan",
               person: "Hakan Ali Tuncay",
               spouse: "",
+              note: "",
               children: []
             }
           ]
         },
 
-        // 4) Sevda
+        // 4) Sevda (manuel alanlar bırakıldı)
         {
           id: "sev",
           person: "Sevda Tuncay",
           spouse: "Ahmed Tuncay",
+          note: "",
           children: [
             {
               id: "bur",
               person: "Burhan Tuncay",
               spouse: "Adalet Tuncay",
+              note: "",
               children: [
-                { id: "burc1", person: "— En büyük çocuk (manuel)", spouse: "", children: [] },
-                { id: "mirac", person: "Miraç Ahmed Tuncay", spouse: "", children: [] }
+                { id: "burc1", person: "— En büyük çocuk (manuel)", spouse: "", note: "", children: [] },
+                { id: "mirac", person: "Miraç Ahmed Tuncay", spouse: "", note: "", children: [] }
               ]
             },
             {
               id: "tubaTop",
               person: "Tuba Topal",
               spouse: "Cian Topal",
+              note: "",
               children: [
-                { id: "malik", person: "Malik Topal", spouse: "", children: [] }
+                { id: "malik", person: "Malik Topal", spouse: "", note: "", children: [] }
               ]
             },
             {
               id: "asli",
               person: "Aslı Tuncay",
               spouse: "— (manuel girilecek)",
+              note: "",
               children: [
-                { id: "aslic1", person: "— Çocuk (manuel)", spouse: "", children: [] }
+                { id: "aslic1", person: "— Çocuk (manuel)", spouse: "", note: "", children: [] }
               ]
             }
           ]
         },
 
-        // 5) Cemal
+        // 5) Cemal (düzeltildi)
         {
           id: "cemal",
           person: "Cemal Tuncay",
-          spouse: "",
-          note: "Boşanmış",
+          spouse: "Agnieszka Tuncay",
+          note: "",
           children: [
-            { id: "cemalc1", person: "— Çocuk (manuel)", spouse: "", children: [] }
+            { id: "lara", person: "Lara Tuncay", spouse: "", note: "", children: [] }
           ]
         },
 
-        // 6) Fatih
+        // 6) Fatih (düzeltildi)
         {
           id: "fatih",
           person: "Fatih Tuncay",
           spouse: "Tatjana Tuncay",
+          note: "Boşanmış",
           children: [
-            { id: "fatc1", person: "— Çocuk 1 (manuel)", spouse: "", children: [] },
-            { id: "fatc2", person: "— Çocuk 2 (manuel)", spouse: "", children: [] },
-            { id: "fatc3", person: "— Çocuk 3 (manuel)", spouse: "", children: [] },
-            { id: "fatc4", person: "— Çocuk 4 (manuel)", spouse: "", children: [] }
+            { id: "senay", person: "Şenay Tuncay", spouse: "", note: "", children: [] },
+            { id: "cemalf", person: "Cemal Tuncay", spouse: "", note: "", children: [] },
+            { id: "esra", person: "Esra Tuncay", spouse: "", note: "", children: [] },
+            { id: "sami", person: "Sami Yusuf Tuncay", spouse: "", note: "", children: [] }
           ]
         }
       ]
     };
 
-    const STORAGE_KEY = "tuncay_family_de_v1";
+    // ------------------ STORAGE ------------------
+    const STORAGE_KEY = "tuncay_family_de_v2_full";
+
+    function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
 
     function loadTree(){
       try{
         const raw = localStorage.getItem(STORAGE_KEY);
-        if(!raw) return structuredClone(DEFAULT_TREE);
+        if(!raw) return clone(DEFAULT_TREE);
         return JSON.parse(raw);
       }catch(e){
-        return structuredClone(DEFAULT_TREE);
+        return clone(DEFAULT_TREE);
       }
     }
-
     function saveTree(tree){
       localStorage.setItem(STORAGE_KEY, JSON.stringify(tree));
     }
 
+    // ------------------ HELPERS ------------------
     function isRealName(name){
       if(!name) return false;
       const t = String(name).trim();
       if(!t) return false;
-      // Placeholders start with "—"
       if(t.startsWith("—")) return false;
       return true;
     }
-
     function countMembers(node){
       let c = 0;
       if(isRealName(node.person)) c++;
@@ -473,57 +499,34 @@
       return c;
     }
 
-    function findNodeById(node, id){
-      if(node.id === id) return node;
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function newId(){
+      return "id_" + Math.random().toString(16).slice(2);
+    }
+
+    // Find node + parent
+    function findNodeAndParent(node, id, parent=null){
+      if(node.id === id) return { node, parent };
       for(const ch of (node.children || [])){
-        const f = findNodeById(ch, id);
-        if(f) return f;
+        const found = findNodeAndParent(ch, id, node);
+        if(found) return found;
       }
       return null;
     }
 
-    function addChild(tree, parentId){
-      const parent = findNodeById(tree, parentId);
-      if(!parent) return;
-
-      const newId = "id_" + Math.random().toString(16).slice(2);
-      parent.children = parent.children || [];
-      parent.children.push({
-        id: newId,
-        person: "— Yeni kişi (manuel)",
-        spouse: "",
-        children: []
-      });
-      saveTree(tree);
-      render(tree);
-    }
-
-    function editPerson(tree, id){
-      const node = findNodeById(tree, id);
-      if(!node) return;
-
-      const newPerson = prompt("Kişi adı (person):", node.person ?? "");
-      if(newPerson === null) return;
-
-      const newSpouse = prompt("Eş adı (spouse) — boş bırakabilirsin:", node.spouse ?? "");
-      if(newSpouse === null) return;
-
-      const newNote = prompt("Not (örn. Boşanmış) — boş bırakabilirsin:", node.note ?? "");
-      if(newNote === null) return;
-
-      node.person = newPerson;
-      node.spouse = newSpouse;
-      node.note = newNote;
-
-      saveTree(tree);
-      render(tree);
-    }
-
     function nodeSummary(node){
-      const p = (node.person || "").trim();
+      const p = (node.person || "").trim() || "(isimsiz)";
       const s = (node.spouse || "").trim();
       const n = (node.note || "").trim();
-      let line = p || "(isimsiz)";
+      let line = p;
       if(s) line += " — " + s;
       if(n) line += " · " + n;
       return line;
@@ -536,67 +539,173 @@
       if(hasSpouse){
         return `
           <div class="couple">
-            <div class="card"><div class="name">${escapeHtml(person)}</div>${hasNote ? `<div class="small">${escapeHtml(note)}</div>` : ""}</div>
+            <div class="card">
+              <div class="name">${escapeHtml(person || "")}</div>
+              ${hasNote ? `<div class="small">${escapeHtml(note)}</div>` : ""}
+            </div>
             <div class="dash">—</div>
-            <div class="card"><div class="name">${escapeHtml(spouse)}</div><div class="small">Eşi</div></div>
+            <div class="card">
+              <div class="name">${escapeHtml(spouse || "")}</div>
+              <div class="small">Eşi</div>
+            </div>
           </div>
         `;
       }
-      // single card
+
       return `
         <div class="card">
-          <div class="name">${escapeHtml(person)}</div>
+          <div class="name">${escapeHtml(person || "")}</div>
           ${hasNote ? `<div class="small">${escapeHtml(note)}</div>` : ""}
         </div>
       `;
     }
 
-    function renderNode(node, genLabel){
+    // ------------------ ACTIONS (EVERYWHERE) ------------------
+    function editNode(tree, id){
+      const found = findNodeAndParent(tree, id);
+      if(!found) return;
+
+      const node = found.node;
+
+      const p = prompt("Kişi adı (person):", node.person ?? "");
+      if(p === null) return;
+
+      const s = prompt("Eş adı (spouse) — boş bırakabilirsin:", node.spouse ?? "");
+      if(s === null) return;
+
+      const n = prompt("Not (örn. Boşanmış) — boş bırakabilirsin:", node.note ?? "");
+      if(n === null) return;
+
+      node.person = p;
+      node.spouse = s;
+      node.note = n;
+
+      saveTree(tree);
+      render(tree);
+    }
+
+    function addSpouse(tree, id){
+      const found = findNodeAndParent(tree, id);
+      if(!found) return;
+      const node = found.node;
+
+      const s = prompt("Eş adı (spouse):", node.spouse ?? "");
+      if(s === null) return;
+
+      node.spouse = s;
+      saveTree(tree);
+      render(tree);
+    }
+
+    function addChild(tree, parentId){
+      const found = findNodeAndParent(tree, parentId);
+      if(!found) return;
+
+      const parent = found.node;
+      parent.children = parent.children || [];
+      parent.children.push({
+        id: newId(),
+        person: "— Yeni kişi (manuel)",
+        spouse: "",
+        note: "",
+        children: []
+      });
+
+      saveTree(tree);
+      render(tree);
+    }
+
+    // Add parents ABOVE a node anywhere:
+    // Creates a new parent node and replaces target node in its parent's children list.
+    // New parents -> children: [targetNode]
+    function addParentsAbove(tree, id){
+      const found = findNodeAndParent(tree, id);
+      if(!found) return;
+
+      // if this is root, make new root
+      const target = found.node;
+      const parent = found.parent;
+
+      const parentPerson = prompt("Ebeveyn (anne/baba) kişi adı:", "— Yeni ebeveyn (manuel)");
+      if(parentPerson === null) return;
+
+      const parentSpouse = prompt("Diğer ebeveyn / eş adı (opsiyonel):", "");
+      if(parentSpouse === null) return;
+
+      const wrapper = {
+        id: newId(),
+        person: parentPerson,
+        spouse: parentSpouse,
+        note: "",
+        children: [ target ]
+      };
+
+      if(!parent){
+        // target is root -> wrapper becomes new root
+        tree = wrapper;
+      }else{
+        // replace target in parent's children
+        parent.children = parent.children || [];
+        const idx = parent.children.findIndex(x => x.id === target.id);
+        if(idx >= 0) parent.children[idx] = wrapper;
+      }
+
+      saveTree(tree);
+      render(tree);
+    }
+
+    function deleteNode(tree, id){
+      const found = findNodeAndParent(tree, id);
+      if(!found) return;
+
+      const parent = found.parent;
+      const node = found.node;
+
+      if(!parent){
+        alert("Kök kişi silinemez. (İstersen ‘Ebeveyn ekle’ ile üstüne yeni kök koyabilirsin.)");
+        return;
+      }
+
+      const ok = confirm(`Silinsin mi?\n${nodeSummary(node)}\n\nBu kişinin tüm alt dalları da silinir.`);
+      if(!ok) return;
+
+      parent.children = (parent.children || []).filter(ch => ch.id !== id);
+
+      saveTree(tree);
+      render(tree);
+    }
+
+    // ------------------ RENDER ------------------
+    function renderNode(node, label){
       const hasChildren = (node.children || []).length > 0;
 
-      // iPhone friendly: details collapsible for everything except top root
       return `
         <section class="section">
           <span class="dot" aria-hidden="true"></span>
-          <p class="gen-label">${escapeHtml(genLabel)}</p>
 
           <details open>
             <summary>
               <div class="sum-left">
                 <div class="sum-title">${escapeHtml(nodeSummary(node))}</div>
-                <div class="sum-sub">${hasChildren ? `${node.children.length} çocuk/alt dal` : "Alt dal yok"}</div>
+                <div class="sum-sub">${escapeHtml(label)} · ${hasChildren ? `${node.children.length} çocuk/alt dal` : "Alt dal yok"}</div>
               </div>
               <div class="sum-right">
                 <button class="btn" type="button" data-action="edit" data-id="${node.id}">✎ Düzenle</button>
+                <button class="btn" type="button" data-action="spouse" data-id="${node.id}">+ Eş</button>
                 <button class="btn primary" type="button" data-action="add" data-id="${node.id}">+ Çocuk</button>
+                <button class="btn" type="button" data-action="parents" data-id="${node.id}">+ Ebeveyn</button>
+                <button class="btn danger" type="button" data-action="del" data-id="${node.id}">🗑 Sil</button>
               </div>
             </summary>
 
             <div style="padding:10px 6px 6px;">
               ${renderCoupleHTML(node.person, node.spouse, node.note)}
+
               ${hasChildren ? `
                 <div class="kids">
                   ${(node.children || []).map(ch => `
                     <div class="kid-line">
-                      ${renderCoupleHTML(ch.person, ch.spouse, ch.note)}
-                      ${((ch.children||[]).length>0) ? `
-                        <div class="kids" style="margin-top:10px;">
-                          ${(ch.children||[]).map(gch => `
-                            <div class="kid-line">
-                              ${renderCoupleHTML(gch.person, gch.spouse, gch.note)}
-                              ${((gch.children||[]).length>0) ? `
-                                <div class="kids" style="margin-top:10px;">
-                                  ${(gch.children||[]).map(gg => `
-                                    <div class="kid-line">
-                                      ${renderCoupleHTML(gg.person, gg.spouse, gg.note)}
-                                    </div>
-                                  `).join("")}
-                                </div>
-                              ` : ""}
-                            </div>
-                          `).join("")}
-                        </div>
-                      ` : ""}
+                      ${renderNode(ch, "Alt Nesil")}
                     </div>
                   `).join("")}
                 </div>
@@ -612,52 +721,47 @@
       const count = countMembers(tree);
       document.getElementById("countPill").textContent = `Toplam üye sayısı: ${count}`;
 
-      // Root (grandparents) stays always visible (not collapsible)
-      const rootHTML = `
-        <div class="couple">
-          <div class="card"><div class="name">${escapeHtml(tree.person)}</div></div>
-          <div class="dash">—</div>
-          <div class="card"><div class="name">${escapeHtml(tree.spouse)}</div><div class="small">Eşi</div></div>
-        </div>
-
+      // Root always visible
+      app.innerHTML = `
+        ${renderCoupleHTML(tree.person, tree.spouse, tree.note)}
         <div class="trunk"></div>
 
+        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin: 0 0 10px;">
+          <button class="btn" type="button" data-action="edit" data-id="${tree.id}">✎ Düzenle (Kök)</button>
+          <button class="btn" type="button" data-action="spouse" data-id="${tree.id}">+ Eş (Kök)</button>
+          <button class="btn primary" type="button" data-action="add" data-id="${tree.id}">+ Çocuk (Kök)</button>
+          <button class="btn" type="button" data-action="parents" data-id="${tree.id}">+ Ebeveyn (Kök)</button>
+        </div>
+
         <div class="children-sections">
-          ${(tree.children || []).map((ch) => renderNode(ch, "1. Nesil Çocuk")).join("")}
+          ${(tree.children || []).map(ch => renderNode(ch, "1. Nesil Çocuk")).join("")}
         </div>
       `;
-
-      app.innerHTML = rootHTML;
 
       // bind buttons
       app.querySelectorAll("button[data-action]").forEach(btn => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
+
           const action = btn.dataset.action;
           const id = btn.dataset.id;
-          const currentTree = loadTree();
 
+          let currentTree = loadTree();
+
+          if(action === "edit") editNode(currentTree, id);
+          if(action === "spouse") addSpouse(currentTree, id);
           if(action === "add") addChild(currentTree, id);
-          if(action === "edit") editPerson(currentTree, id);
+          if(action === "parents") addParentsAbove(currentTree, id);
+          if(action === "del") deleteNode(currentTree, id);
         });
       });
     }
 
-    function escapeHtml(s){
-      return String(s ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    // Init
+    // ------------------ INIT ------------------
     let TREE = loadTree();
     render(TREE);
 
-    // Reset button
     document.getElementById("resetBtn").addEventListener("click", () => {
       if(confirm("Bu cihazdaki kaydedilen değişiklikler sıfırlansın mı?")){
         localStorage.removeItem(STORAGE_KEY);
