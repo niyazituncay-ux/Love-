@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tuncay Ailesi Soy Ağacı</title>
+  <title>Tuncay Ailesi Soy Ağacı (Almanya)</title>
 
   <style>
     :root{
@@ -14,7 +14,7 @@
       --card: rgba(245,239,225,0.10);
       --card2: rgba(245,239,225,0.14);
       --line: rgba(212,175,55,0.85);
-      --shadow: 0 12px 30px rgba(0,0,0,0.35);
+      --shadow: 0 10px 24px rgba(0,0,0,0.32);
     }
 
     *{ box-sizing:border-box; }
@@ -23,74 +23,86 @@
       font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
       background: linear-gradient(to bottom, var(--bg1), var(--bg2));
       color: var(--ivory);
+      overflow-x:hidden;
     }
 
     header{
-      padding: 26px 14px 16px;
+      padding: 22px 12px 12px;
       text-align:center;
     }
     h1{
       margin:0;
       color: var(--gold);
-      letter-spacing: 1.5px;
-      font-size: clamp(20px, 4.8vw, 32px);
+      letter-spacing: 1.2px;
+      font-size: clamp(18px, 4.6vw, 28px);
     }
-    .subtitle{
+    .meta{
       margin-top: 8px;
-      opacity: .85;
+      opacity: .9;
       font-size: 13px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill{
+      border: 1px solid rgba(212,175,55,0.55);
+      background: rgba(0,0,0,0.18);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
     }
 
-    /* Cards */
+    .wrap{
+      padding: 10px 10px 64px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    /* Cards (smaller) */
     .card{
       background: linear-gradient(180deg, var(--card2), var(--card));
       border:1px solid rgba(212,175,55,0.55);
-      border-radius: 16px;
-      padding: 12px 14px;
+      border-radius: 14px;
+      padding: 10px 12px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(8px);
       text-align:center;
       width: 100%;
-      max-width: 520px; /* iPhone friendly */
+      max-width: 520px;
       margin: 0 auto;
       position: relative;
     }
     .card::before{
       content:"✶";
       position:absolute;
-      top:-12px;
+      top:-11px;
       left:50%;
       transform:translateX(-50%);
       color: var(--gold);
-      font-size: 18px;
+      font-size: 16px;
       background: rgba(8,24,24,0.95);
       padding: 0 6px;
       border-radius: 10px;
     }
-
     .name{
       font-weight: 800;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.25;
+      word-break: break-word;
     }
     .small{
       margin-top: 6px;
-      font-size: 13px;
+      font-size: 12px;
       opacity: .88;
       line-height: 1.35;
     }
 
-    /* Layout: "Flow" / "River" */
-    .wrap{
-      padding: 10px 12px 70px;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    /* Parent couple in one line */
+    /* Couple row */
     .couple{
       display:flex;
-      gap: 12px;
+      gap: 10px;
       align-items: stretch;
       justify-content: center;
       flex-wrap: nowrap;
@@ -100,33 +112,29 @@
       display:grid;
       place-items:center;
       color: var(--gold);
-      font-size: 26px;
+      font-size: 20px;
       padding: 0 2px;
       user-select:none;
     }
 
-    /* Trunk line from parents to children */
     .trunk{
       width: 2px;
-      height: 28px;
+      height: 24px;
       background: var(--line);
-      margin: 14px auto;
+      margin: 12px auto;
       border-radius: 999px;
     }
 
-    /* Children sections (same generation) */
+    /* Children sections: SAME generation -> each is a section (flow) */
     .children-sections{
       display:flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 14px;
     }
-
     .section{
       position: relative;
-      padding-left: 18px; /* space for vertical spine */
+      padding-left: 16px;
     }
-
-    /* Left spine line for each section */
     .section::before{
       content:"";
       position:absolute;
@@ -134,54 +142,34 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: rgba(212,175,55,0.35);
+      background: rgba(212,175,55,0.30);
       border-radius: 999px;
     }
-
-    /* Connector dot */
     .dot{
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: var(--gold);
       position:absolute;
       left: 2px;
-      top: 16px;
+      top: 14px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.35);
     }
-
-    /* Child header line (generation) */
     .gen-label{
-      font-size: 12px;
+      font-size: 11px;
       opacity: .75;
-      margin: 0 0 8px 0;
-      letter-spacing: .4px;
+      margin: 0 0 6px 0;
+      letter-spacing: .35px;
     }
 
-    /* Child couple row (child — spouse) */
-    .child-couple{
-      display:flex;
-      align-items: stretch;
-      justify-content:center;
-      gap: 10px;
-      flex-wrap: nowrap;
-    }
-    .child-couple .card{
-      max-width: 330px;
-    }
-    .child-couple .dash{
-      font-size: 22px;
-    }
-
-    /* Kids under a child */
+    /* Kids list under a person */
     .kids{
       margin-top: 10px;
       padding-left: 10px;
       display:flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
-
     .kid-line{
       position: relative;
       padding-left: 14px;
@@ -193,11 +181,60 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: rgba(212,175,55,0.35);
+      background: rgba(212,175,55,0.28);
       border-radius: 999px;
     }
-    .kid{
-      max-width: 520px;
+
+    /* Collapsible (super iPhone-friendly) */
+    details{
+      border: 1px solid rgba(212,175,55,0.28);
+      border-radius: 14px;
+      background: rgba(0,0,0,0.12);
+      padding: 8px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      user-select:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .sum-left{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      text-align:left;
+    }
+    .sum-title{
+      font-weight:800;
+      color: var(--ivory);
+      font-size: 13px;
+    }
+    .sum-sub{
+      font-size: 11px;
+      opacity:.78;
+    }
+    .sum-right{
+      display:flex; gap:8px; align-items:center;
+    }
+
+    .btn{
+      border:1px solid rgba(212,175,55,0.55);
+      background: rgba(0,0,0,0.18);
+      color: var(--ivory);
+      padding: 7px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:700;
+      font-size: 12px;
+    }
+    .btn:hover{ background: rgba(245,239,225,0.10); }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(212,175,55,0.24), rgba(212,175,55,0.12));
+      border-color: rgba(212,175,55,0.75);
     }
 
     footer{
@@ -207,124 +244,419 @@
       padding: 18px 12px 34px;
     }
 
-    /* iPhone fit: keep things visible, no horizontal overflow */
     @media (max-width: 420px){
-      .couple{ gap: 10px; }
-      .dash{ font-size: 22px; }
-      .name{ font-size: 14.5px; }
-      .card{ padding: 11px 12px; }
+      .dash{ font-size: 18px; }
+      .name{ font-size: 13.5px; }
+      .card{ padding: 9px 10px; }
+      .wrap{ padding-left: 8px; padding-right: 8px; }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Tuncay Ailesi Soy Ağacı</h1>
-    <div class="subtitle">Nesiller, bir nehir gibi birbirine akar ✶</div>
+    <h1>Tuncay Ailesi Soy Ağacı (Almanya)</h1>
+    <div class="meta">
+      <span class="pill" id="countPill">Toplam üye sayısı: …</span>
+      <button class="btn primary" id="resetBtn" type="button">Bu cihazda kaydı sıfırla</button>
+    </div>
   </header>
 
-  <main class="wrap">
-    <!-- Parents -->
-    <div class="couple">
-      <div class="card">
-        <div class="name">Hasan Orhan Tuncay</div>
-      </div>
-      <div class="dash">—</div>
-      <div class="card">
-        <div class="name">Neriman Tuncay</div>
-      </div>
-    </div>
+  <main class="wrap" id="app"></main>
 
-    <div class="trunk"></div>
+  <footer>✶ Dilediğin zaman kişi ekleyebilir / düzenleyebilirsin ✶</footer>
 
-    <!-- Children (same generation, each as a section) -->
-    <div class="children-sections">
+  <script>
+    // --------- Data (Default) ----------
+    // Not: Bu yapı aynı sistemle büyür: kişi -> eş -> çocuklar
+    const DEFAULT_TREE = {
+      id: "root",
+      person: "Opa Niyazi Tuncay",
+      spouse: "Oma Elmas Tuncay",
+      children: [
+        {
+          id: "ays",
+          person: "Ayşegül Tuncay",
+          spouse: "", // boş = yazdırma
+          note: "Boşanmış",
+          children: [
+            {
+              id: "umm",
+              person: "Ümmühan Akar",
+              spouse: "Muammer Akar",
+              children: [
+                { id: "osma", person: "Osman Akar", spouse: "", children: [] },
+                { id: "musa", person: "Musa Akar", spouse: "", children: [] },
+                { id: "mery", person: "Meryem Akar", spouse: "", children: [] },
+                { id: "yusu", person: "Yusuf Akar", spouse: "", children: [] },
+              ]
+            },
+            {
+              id: "sem",
+              person: "Semra",
+              spouse: "Turan",
+              children: [
+                // Kullanıcının isteği: "Baran" iki A — yazımı sen düzenleyebilirsin
+                { id: "bara", person: "Baraan Kan", spouse: "", children: [] }
+              ]
+            }
+          ]
+        },
 
-      <!-- 1) Niyazi -->
-      <section class="section">
-        <span class="dot" aria-hidden="true"></span>
-        <p class="gen-label">1. Nesil Çocuk</p>
+        {
+          id: "hus",
+          person: "Hüseyin Ayhan Tuncay",
+          spouse: "Aynur Tuncay",
+          children: [
+            {
+              id: "ibr",
+              person: "İbrahim Tuncay",
+              spouse: "Betül Tuncay",
+              children: [
+                { id: "miray", person: "Miray Tuncay", spouse: "", children: [] }
+              ]
+            },
+            {
+              id: "elif",
+              person: "Elif Tuncay",
+              spouse: "— (manuel girilecek)",
+              children: [
+                { id: "elifc1", person: "— Çocuk 1 (manuel)", spouse: "", children: [] },
+                { id: "elifc2", person: "— Çocuk 2 (manuel)", spouse: "", children: [] }
+              ]
+            },
+            {
+              id: "kem",
+              person: "Kemal Tuncay",
+              spouse: "— (manuel girilecek)",
+              children: []
+            }
+          ]
+        },
 
-        <div class="child-couple">
-          <div class="card">
-            <div class="name">Niyazi Tuncay</div>
+        // 3) Hasan Orhan (senin önceki ağaç kısmın buraya alındı)
+        {
+          id: "has",
+          person: "Hasan Orhan Tuncay",
+          spouse: "Neriman Tuncay",
+          children: [
+            {
+              id: "niy",
+              person: "Niyazi Tuncay",
+              spouse: "Derya Tuncay",
+              children: [
+                { id: "fatihE", person: "Fatih Eren Tuncay", spouse: "", children: [] },
+                { id: "asya", person: "Asya Tuncay", spouse: "", children: [] }
+              ]
+            },
+            {
+              id: "ulku",
+              person: "Ülkü Efe",
+              spouse: "Ertan Efe",
+              children: [
+                { id: "hamza", person: "Hamza Ali Efe", spouse: "", children: [] }
+              ]
+            },
+            {
+              id: "ugur",
+              person: "Uğur Tuncay",
+              spouse: "Tuğba Tuncay Yumuşakgeyle",
+              children: []
+            },
+            {
+              id: "hakan",
+              person: "Hakan Ali Tuncay",
+              spouse: "",
+              children: []
+            }
+          ]
+        },
+
+        // 4) Sevda
+        {
+          id: "sev",
+          person: "Sevda Tuncay",
+          spouse: "Ahmed Tuncay",
+          children: [
+            {
+              id: "bur",
+              person: "Burhan Tuncay",
+              spouse: "Adalet Tuncay",
+              children: [
+                { id: "burc1", person: "— En büyük çocuk (manuel)", spouse: "", children: [] },
+                { id: "mirac", person: "Miraç Ahmed Tuncay", spouse: "", children: [] }
+              ]
+            },
+            {
+              id: "tubaTop",
+              person: "Tuba Topal",
+              spouse: "Cian Topal",
+              children: [
+                { id: "malik", person: "Malik Topal", spouse: "", children: [] }
+              ]
+            },
+            {
+              id: "asli",
+              person: "Aslı Tuncay",
+              spouse: "— (manuel girilecek)",
+              children: [
+                { id: "aslic1", person: "— Çocuk (manuel)", spouse: "", children: [] }
+              ]
+            }
+          ]
+        },
+
+        // 5) Cemal
+        {
+          id: "cemal",
+          person: "Cemal Tuncay",
+          spouse: "",
+          note: "Boşanmış",
+          children: [
+            { id: "cemalc1", person: "— Çocuk (manuel)", spouse: "", children: [] }
+          ]
+        },
+
+        // 6) Fatih
+        {
+          id: "fatih",
+          person: "Fatih Tuncay",
+          spouse: "Tatjana Tuncay",
+          children: [
+            { id: "fatc1", person: "— Çocuk 1 (manuel)", spouse: "", children: [] },
+            { id: "fatc2", person: "— Çocuk 2 (manuel)", spouse: "", children: [] },
+            { id: "fatc3", person: "— Çocuk 3 (manuel)", spouse: "", children: [] },
+            { id: "fatc4", person: "— Çocuk 4 (manuel)", spouse: "", children: [] }
+          ]
+        }
+      ]
+    };
+
+    const STORAGE_KEY = "tuncay_family_de_v1";
+
+    function loadTree(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return structuredClone(DEFAULT_TREE);
+        return JSON.parse(raw);
+      }catch(e){
+        return structuredClone(DEFAULT_TREE);
+      }
+    }
+
+    function saveTree(tree){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tree));
+    }
+
+    function isRealName(name){
+      if(!name) return false;
+      const t = String(name).trim();
+      if(!t) return false;
+      // Placeholders start with "—"
+      if(t.startsWith("—")) return false;
+      return true;
+    }
+
+    function countMembers(node){
+      let c = 0;
+      if(isRealName(node.person)) c++;
+      if(isRealName(node.spouse)) c++;
+      for(const ch of (node.children || [])) c += countMembers(ch);
+      return c;
+    }
+
+    function findNodeById(node, id){
+      if(node.id === id) return node;
+      for(const ch of (node.children || [])){
+        const f = findNodeById(ch, id);
+        if(f) return f;
+      }
+      return null;
+    }
+
+    function addChild(tree, parentId){
+      const parent = findNodeById(tree, parentId);
+      if(!parent) return;
+
+      const newId = "id_" + Math.random().toString(16).slice(2);
+      parent.children = parent.children || [];
+      parent.children.push({
+        id: newId,
+        person: "— Yeni kişi (manuel)",
+        spouse: "",
+        children: []
+      });
+      saveTree(tree);
+      render(tree);
+    }
+
+    function editPerson(tree, id){
+      const node = findNodeById(tree, id);
+      if(!node) return;
+
+      const newPerson = prompt("Kişi adı (person):", node.person ?? "");
+      if(newPerson === null) return;
+
+      const newSpouse = prompt("Eş adı (spouse) — boş bırakabilirsin:", node.spouse ?? "");
+      if(newSpouse === null) return;
+
+      const newNote = prompt("Not (örn. Boşanmış) — boş bırakabilirsin:", node.note ?? "");
+      if(newNote === null) return;
+
+      node.person = newPerson;
+      node.spouse = newSpouse;
+      node.note = newNote;
+
+      saveTree(tree);
+      render(tree);
+    }
+
+    function nodeSummary(node){
+      const p = (node.person || "").trim();
+      const s = (node.spouse || "").trim();
+      const n = (node.note || "").trim();
+      let line = p || "(isimsiz)";
+      if(s) line += " — " + s;
+      if(n) line += " · " + n;
+      return line;
+    }
+
+    function renderCoupleHTML(person, spouse, note){
+      const hasSpouse = Boolean((spouse || "").trim());
+      const hasNote = Boolean((note || "").trim());
+
+      if(hasSpouse){
+        return `
+          <div class="couple">
+            <div class="card"><div class="name">${escapeHtml(person)}</div>${hasNote ? `<div class="small">${escapeHtml(note)}</div>` : ""}</div>
+            <div class="dash">—</div>
+            <div class="card"><div class="name">${escapeHtml(spouse)}</div><div class="small">Eşi</div></div>
           </div>
-          <div class="dash">—</div>
-          <div class="card">
-            <div class="name">Derya Sükran Tuncay</div>
-            <div class="small">Eşi</div>
-          </div>
-        </div>
-
-        <div class="kids">
-          <div class="kid-line">
-            <div class="card kid">
-              <div class="name">Fatih Eren Tuncay</div>
-            </div>
-          </div>
-          <div class="kid-line">
-            <div class="card kid">
-              <div class="name">Asya Tuncay</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 2) Ülkü -->
-      <section class="section">
-        <span class="dot" aria-hidden="true"></span>
-        <p class="gen-label">1. Nesil Çocuk</p>
-
-        <div class="child-couple">
-          <div class="card">
-            <div class="name">Ülkü Efe</div>
-          </div>
-          <div class="dash">—</div>
-          <div class="card">
-            <div class="name">Ertan Efe</div>
-            <div class="small">Eşi</div>
-          </div>
-        </div>
-
-        <div class="kids">
-          <div class="kid-line">
-            <div class="card kid">
-              <div class="name">Hamza Ali Efe</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3) Uğur -->
-<section class="section">
-  <span class="dot" aria-hidden="true"></span>
-  <p class="gen-label">1. Nesil Çocuk</p>
-
-  <div class="child-couple">
-    <div class="card">
-      <div class="name">Uğur Tuncay</div>
-    </div>
-    <div class="dash">—</div>
-    <div class="card">
-      <div class="name">Tuğba Tuncay </div>
-      <div class="small">Eşi</div>
-    </div>
-  </div>
-</section>
-
-      <!-- 4) Hakan Ali -->
-      <section class="section">
-        <span class="dot" aria-hidden="true"></span>
-        <p class="gen-label">1. Nesil Çocuk</p>
-
+        `;
+      }
+      // single card
+      return `
         <div class="card">
-          <div class="name">Hakan Ali Tuncay</div>
+          <div class="name">${escapeHtml(person)}</div>
+          ${hasNote ? `<div class="small">${escapeHtml(note)}</div>` : ""}
         </div>
-      </section>
+      `;
+    }
 
-    </div>
-  </main>
+    function renderNode(node, genLabel){
+      const hasChildren = (node.children || []).length > 0;
 
-  <footer>✶ Tuncay Ailesi Soy Ağacı ✶</footer>
+      // iPhone friendly: details collapsible for everything except top root
+      return `
+        <section class="section">
+          <span class="dot" aria-hidden="true"></span>
+          <p class="gen-label">${escapeHtml(genLabel)}</p>
+
+          <details open>
+            <summary>
+              <div class="sum-left">
+                <div class="sum-title">${escapeHtml(nodeSummary(node))}</div>
+                <div class="sum-sub">${hasChildren ? `${node.children.length} çocuk/alt dal` : "Alt dal yok"}</div>
+              </div>
+              <div class="sum-right">
+                <button class="btn" type="button" data-action="edit" data-id="${node.id}">✎ Düzenle</button>
+                <button class="btn primary" type="button" data-action="add" data-id="${node.id}">+ Çocuk</button>
+              </div>
+            </summary>
+
+            <div style="padding:10px 6px 6px;">
+              ${renderCoupleHTML(node.person, node.spouse, node.note)}
+              ${hasChildren ? `
+                <div class="kids">
+                  ${(node.children || []).map(ch => `
+                    <div class="kid-line">
+                      ${renderCoupleHTML(ch.person, ch.spouse, ch.note)}
+                      ${((ch.children||[]).length>0) ? `
+                        <div class="kids" style="margin-top:10px;">
+                          ${(ch.children||[]).map(gch => `
+                            <div class="kid-line">
+                              ${renderCoupleHTML(gch.person, gch.spouse, gch.note)}
+                              ${((gch.children||[]).length>0) ? `
+                                <div class="kids" style="margin-top:10px;">
+                                  ${(gch.children||[]).map(gg => `
+                                    <div class="kid-line">
+                                      ${renderCoupleHTML(gg.person, gg.spouse, gg.note)}
+                                    </div>
+                                  `).join("")}
+                                </div>
+                              ` : ""}
+                            </div>
+                          `).join("")}
+                        </div>
+                      ` : ""}
+                    </div>
+                  `).join("")}
+                </div>
+              ` : ""}
+            </div>
+          </details>
+        </section>
+      `;
+    }
+
+    function render(tree){
+      const app = document.getElementById("app");
+      const count = countMembers(tree);
+      document.getElementById("countPill").textContent = `Toplam üye sayısı: ${count}`;
+
+      // Root (grandparents) stays always visible (not collapsible)
+      const rootHTML = `
+        <div class="couple">
+          <div class="card"><div class="name">${escapeHtml(tree.person)}</div></div>
+          <div class="dash">—</div>
+          <div class="card"><div class="name">${escapeHtml(tree.spouse)}</div><div class="small">Eşi</div></div>
+        </div>
+
+        <div class="trunk"></div>
+
+        <div class="children-sections">
+          ${(tree.children || []).map((ch) => renderNode(ch, "1. Nesil Çocuk")).join("")}
+        </div>
+      `;
+
+      app.innerHTML = rootHTML;
+
+      // bind buttons
+      app.querySelectorAll("button[data-action]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const action = btn.dataset.action;
+          const id = btn.dataset.id;
+          const currentTree = loadTree();
+
+          if(action === "add") addChild(currentTree, id);
+          if(action === "edit") editPerson(currentTree, id);
+        });
+      });
+    }
+
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // Init
+    let TREE = loadTree();
+    render(TREE);
+
+    // Reset button
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      if(confirm("Bu cihazdaki kaydedilen değişiklikler sıfırlansın mı?")){
+        localStorage.removeItem(STORAGE_KEY);
+        TREE = loadTree();
+        render(TREE);
+      }
+    });
+  </script>
 </body>
 </html>
