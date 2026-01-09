@@ -82,7 +82,7 @@
 
     /* Viewport: fit-to-screen stage */
     .viewport{
-      height: calc(100vh - 70px);
+      height: calc(100vh - 86px);
       padding: 10px;
       overflow: hidden;
       position: relative;
@@ -115,7 +115,7 @@
     /* Node style (compact) */
     .node{
       position:absolute;
-      width: 190px;          /* kleiner */
+      width: 190px;
       padding: 8px 9px;
       border-radius: 12px;
       background: linear-gradient(180deg, var(--card2), var(--card));
@@ -170,6 +170,35 @@
       backdrop-filter: blur(8px);
       user-select:none;
     }
+
+    /* -------- PRINT / PDF -------- */
+    @media print{
+      body{ overflow: visible !important; background: #ffffff !important; color:#000 !important; }
+      header, .hint{ display:none !important; }
+      .viewport{ height: auto !important; overflow: visible !important; padding: 0 !important; }
+      .stage{ transform: none !important; }
+      /* Make cards printer-friendly */
+      .node{
+        box-shadow:none !important;
+        backdrop-filter:none !important;
+        background: #fff !important;
+        border: 1px solid #b88a1e !important;
+      }
+      .node::before{
+        background:#fff !important;
+        color:#b88a1e !important;
+      }
+      #lines path{
+        stroke: #b88a1e !important;
+        opacity: 1 !important;
+        filter:none !important;
+      }
+      /* Landscape for better horizontal trees */
+      @page{
+        size: A4 landscape;
+        margin: 8mm;
+      }
+    }
   </style>
 </head>
 
@@ -179,7 +208,11 @@
     <div class="meta">
       <span class="pill" id="countPill">Toplam üye sayısı: …</span>
       <button class="btn" id="fitBtn" type="button">Ekrana Sığdır</button>
-      <button class="btn primary" id="resetBtn" type="button">Bu cihazda kaydı sıfırla</button>
+      <button class="btn primary" id="saveBtn" type="button">Kaydet</button>
+      <button class="btn" id="shareBtn" type="button">Link Oluştur</button>
+      <button class="btn" id="copyLinkBtn" type="button">Linki Kopyala</button>
+      <button class="btn primary" id="pdfBtn" type="button">PDF İndir</button>
+      <button class="btn danger" id="resetBtn" type="button">Sıfırla</button>
     </div>
   </header>
 
@@ -357,9 +390,11 @@
       ]
     };
 
-    const STORAGE_KEY = "tuncay_family_de_generations_v1";
+    // ------------------ STORAGE + SHARE ------------------
+    const STORAGE_KEY = "tuncay_family_de_generations_share_pdf_v1";
 
     function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+
     function loadTree(){
       try{
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -369,6 +404,58 @@
     }
     function saveTree(tree){ localStorage.setItem(STORAGE_KEY, JSON.stringify(tree)); }
 
+    function base64UrlEncode(str){
+      const bytes = new TextEncoder().encode(str);
+      let bin = "";
+      bytes.forEach(b => bin += String.fromCharCode(b));
+      const b64 = btoa(bin);
+      return b64.replaceAll("+","-").replaceAll("/","_").replaceAll("=","");
+    }
+    function base64UrlDecode(b64url){
+      const b64 = b64url.replaceAll("-","+").replaceAll("_","/");
+      const pad = b64.length % 4 ? "=".repeat(4 - (b64.length % 4)) : "";
+      const bin = atob(b64 + pad);
+      const bytes = new Uint8Array([...bin].map(ch => ch.charCodeAt(0)));
+      return new TextDecoder().decode(bytes);
+    }
+    function makeShareLink(tree){
+      const json = JSON.stringify(tree);
+      const data = base64UrlEncode(json);
+      const url = new URL(window.location.href);
+      url.hash = "data=" + data;
+      return url.toString();
+    }
+    function tryLoadFromShareLink(){
+      const hash = window.location.hash || "";
+      if(!hash.startsWith("#data=")) return null;
+      const data = hash.slice("#data=".length);
+      try{
+        const json = base64UrlDecode(data);
+        const obj = JSON.parse(json);
+        if(!obj || typeof obj !== "object") return null;
+        if(!("person" in obj) || !("children" in obj)) return null;
+        saveTree(obj);
+        return obj;
+      }catch(e){
+        return null;
+      }
+    }
+    async function copyToClipboard(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("Link kopyalandı ✅");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        alert("Link kopyalandı ✅");
+      }
+    }
+
+    // ------------------ HELPERS ------------------
     function isRealName(name){
       if(!name) return false;
       const t = String(name).trim();
@@ -383,7 +470,6 @@
       for(const ch of (node.children||[])) c += countMembers(ch);
       return c;
     }
-
     function escapeHtml(s){
       return String(s ?? "")
         .replaceAll("&","&amp;")
@@ -393,7 +479,6 @@
         .replaceAll("'","&#039;");
     }
     function newId(){ return "id_" + Math.random().toString(16).slice(2); }
-
     function findNodeAndParent(node, id, parent=null){
       if(node.id === id) return { node, parent };
       for(const ch of (node.children||[])){
@@ -403,7 +488,7 @@
       return null;
     }
 
-    // -------- Actions (everywhere) --------
+    // -------- Actions --------
     function editNode(tree, id){
       const found = findNodeAndParent(tree, id);
       if(!found) return;
@@ -424,35 +509,28 @@
       saveTree(tree);
       render(tree);
     }
-
     function addSpouse(tree, id){
       const found = findNodeAndParent(tree, id);
       if(!found) return;
       const node = found.node;
-
       const s = prompt("Eş adı (spouse):", node.spouse ?? "");
       if(s === null) return;
-
       node.spouse = s;
       saveTree(tree);
       render(tree);
     }
-
     function addChild(tree, parentId){
       const found = findNodeAndParent(tree, parentId);
       if(!found) return;
       const parent = found.node;
-
       parent.children = parent.children || [];
       parent.children.push({ id:newId(), person:"— Yeni kişi (manuel)", spouse:"", note:"", children:[] });
       saveTree(tree);
       render(tree);
     }
-
     function addParentsAbove(tree, id){
       const found = findNodeAndParent(tree, id);
       if(!found) return;
-
       const target = found.node;
       const parent = found.parent;
 
@@ -473,7 +551,6 @@
       saveTree(tree);
       render(tree);
     }
-
     function deleteNode(tree, id){
       const found = findNodeAndParent(tree, id);
       if(!found) return;
@@ -488,8 +565,8 @@
       render(tree);
     }
 
-    // -------- Layout: Generations (columns) --------
-    const NODE_W = 190, NODE_H = 86; // approx; we'll measure after render too
+    // -------- Layout (Generations columns) --------
+    const NODE_W = 190, NODE_H = 86;
     const COL_GAP = 110;
     const ROW_GAP = 30;
     const PAD = 20;
@@ -512,12 +589,9 @@
     }
 
     function layoutPositions(root){
-      // Simple, stable: place nodes column by column, top-down
-      // Then, try to center parents over children by one refinement pass.
       const cols = collectByDepth(root);
+      const pos = new Map();
 
-      const pos = new Map(); // id -> {x,y,w,h}
-      // initial placement
       for(let d=0; d<cols.length; d++){
         const x = PAD + d*(NODE_W + COL_GAP);
         for(let i=0; i<cols[d].length; i++){
@@ -526,7 +600,6 @@
         }
       }
 
-      // refinement: center each parent to its children average y
       function refine(n){
         const kids = n.children||[];
         if(kids.length){
@@ -539,11 +612,9 @@
       }
       refine(root);
 
-      // After refine, prevent overlaps inside each column (simple sweep)
       for(let d=0; d<cols.length; d++){
         const ids = cols[d].map(n => n.id);
         ids.sort((a,b)=>pos.get(a).y - pos.get(b).y);
-
         let currentY = PAD;
         for(const id of ids){
           const p = pos.get(id);
@@ -552,7 +623,6 @@
         }
       }
 
-      // compute bounds
       let maxX=0, maxY=0;
       for(const v of pos.values()){
         maxX = Math.max(maxX, v.x + v.w);
@@ -566,10 +636,7 @@
       svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
       svg.setAttribute("width", width);
       svg.setAttribute("height", height);
-      svg.innerHTML = "";
-
-      // defs (soft glow)
-      svg.insertAdjacentHTML("beforeend", `
+      svg.innerHTML = `
         <defs>
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="1.2" result="blur"></feGaussianBlur>
@@ -579,12 +646,11 @@
             </feMerge>
           </filter>
         </defs>
-      `);
+      `;
 
       function line(x1,y1,x2,y2){
         const path = document.createElementNS("http://www.w3.org/2000/svg","path");
         const midX = (x1+x2)/2;
-        // smooth cubic
         const d = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
         path.setAttribute("d", d);
         path.setAttribute("fill","none");
@@ -599,7 +665,6 @@
         const p = pos.get(n.id);
         const x1 = p.x + p.w;
         const y1 = p.y + p.h/2;
-
         for(const ch of (n.children||[])){
           const c = pos.get(ch.id);
           const x2 = c.x;
@@ -611,7 +676,6 @@
       walk(tree);
     }
 
-    // -------- Render nodes --------
     function nodeHTML(node){
       return `
         <div class="node" data-node="${node.id}">
@@ -638,6 +702,7 @@
       return arr;
     }
 
+    // -------- Render + Fit --------
     function render(tree){
       document.getElementById("countPill").textContent = `Toplam üye sayısı: ${countMembers(tree)}`;
 
@@ -650,7 +715,6 @@
       const all = flatten(tree);
       nodes.innerHTML = all.map(nodeHTML).join("");
 
-      // position nodes
       nodes.querySelectorAll(".node").forEach(el => {
         const id = el.getAttribute("data-node");
         const p = pos.get(id);
@@ -658,10 +722,8 @@
         el.style.top = p.y + "px";
       });
 
-      // draw lines behind
       drawLines(tree, pos, width, height);
 
-      // bind actions
       nodes.querySelectorAll("button[data-action]").forEach(btn => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
@@ -680,7 +742,6 @@
       requestAnimationFrame(() => fitToScreen());
     }
 
-    // -------- Auto-Fit (one glance) --------
     function fitToScreen(){
       const viewport = document.getElementById("viewport");
       const stage = document.getElementById("stage");
@@ -698,25 +759,64 @@
       const pad = 8;
       let s = Math.min((vW - pad)/cW, (vH - pad)/cH);
       s = Math.min(s, 1);
-      s = Math.max(s, 0.12); // allow very small fit if many members
+      s = Math.max(s, 0.12);
 
       stage.style.transform = `scale(${s})`;
     }
 
-    // -------- Init & Controls --------
-    let TREE = loadTree();
+    // ------------------ PDF (PRINT) ------------------
+    // En güvenlisi: tarayıcının "PDF olarak kaydet" fonksiyonu.
+    // Biz otomatik landscape + temiz görünüm verdik (print CSS).
+    function exportPDF(){
+      const stage = document.getElementById("stage");
+      // Print'te scale istemiyoruz -> print CSS zaten kaldırıyor.
+      // Ama yazdırmadan önce ağacı net görmek için fit uygula:
+      fitToScreen();
+      setTimeout(() => window.print(), 50);
+    }
+
+    // ------------------ INIT ------------------
+    let TREE = tryLoadFromShareLink() || loadTree();
+    saveTree(TREE); // ensure persisted
     render(TREE);
 
+    // Buttons
     document.getElementById("fitBtn").addEventListener("click", () => fitToScreen());
-    window.addEventListener("resize", () => fitToScreen());
+
+    document.getElementById("saveBtn").addEventListener("click", () => {
+      const t = loadTree();
+      saveTree(t);
+      alert("Kaydedildi ✅");
+    });
+
+    document.getElementById("shareBtn").addEventListener("click", () => {
+      const t = loadTree();
+      const link = makeShareLink(t);
+      // put data into current URL hash so user sees "current state"
+      window.location.hash = link.split("#")[1];
+      alert("Link oluşturuldu ✅ (Şimdi 'Linki Kopyala' yapabilirsin)");
+    });
+
+    document.getElementById("copyLinkBtn").addEventListener("click", async () => {
+      const t = loadTree();
+      const link = makeShareLink(t);
+      await copyToClipboard(link);
+    });
+
+    document.getElementById("pdfBtn").addEventListener("click", () => exportPDF());
 
     document.getElementById("resetBtn").addEventListener("click", () => {
       if(confirm("Bu cihazdaki kaydedilen değişiklikler sıfırlansın mı?")){
         localStorage.removeItem(STORAGE_KEY);
-        TREE = loadTree();
+        // clear share hash too
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+        TREE = clone(DEFAULT_TREE);
+        saveTree(TREE);
         render(TREE);
       }
     });
+
+    window.addEventListener("resize", () => fitToScreen());
   </script>
 </body>
 </html>
