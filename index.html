@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuncay Ailesi – Yıldız Ağaç</title>
 
+  <style>
+    body{
+      margin:0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1f4d4d, #081818);
+      color:#f5efe1;
+    }
+
+    header{
+      text-align:center;
+      padding:30px 20px 10px;
+    }
+
+    h1{
+      color:#d4af37;
+      letter-spacing:2px;
+      margin-bottom:6px;
+    }
+
+    .subtitle{
+      opacity:.85;
+      font-size:14px;
+    }
+
+    .tree{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:40px;
+      padding:40px 20px 80px;
+    }
+
+    .level{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:30px;
+    }
+
+    .card{
+      background: rgba(245,239,225,0.1);
+      border:1px solid rgba(212,175,55,0.5);
+      border-radius:18px;
+      padding:14px 18px;
+      min-width:220px;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+      position:relative;
+    }
+
+    .card::before{
+      content:"✶";
+      position:absolute;
+      top:-12px;
+      left:50%;
+      transform:translateX(-50%);
+      color:#d4af37;
+      font-size:18px;
+      background:#081818;
+      padding:0 6px;
+    }
+
+    .name{
+      font-weight:700;
+      font-size:15px;
+      margin-bottom:6px;
+    }
+
+    .info{
+      font-size:13px;
+      opacity:.9;
+      line-height:1.4;
+    }
+
+    footer{
+      text-align:center;
+      font-size:12px;
+      opacity:.6;
+      padding-bottom:30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Tuncay Ailesi</h1>
+  <div class="subtitle">Osmanlı Desenli Yıldız Soy Ağacı</div>
+</header>
+
+<div class="tree">
+
+  <!-- KÖK -->
+  <div class="level">
+    <div class="card">
+      <div class="name">Hasan Orhan Tuncay</div>
+      <div class="info">Eşi: Neriman Tuncay</div>
+    </div>
+  </div>
+
+  <!-- ÇOCUKLAR -->
+  <div class="level">
+
+    <div class="card">
+      <div class="name">Niyazi Tuncay</div>
+      <div class="info">
+        Eşi: Derya Tuncay<br>
+        Çocukları:<br>
+        Fatih Eren Tuncay<br>
+        Asya Tuncay
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="name">Ülkü Efe</div>
+      <div class="info">
+        Eşi: Ertan Efe<br>
+        Çocuğu:<br>
+        Hamza Ali Efe
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="name">Ur Tuncay</div>
+    </div>
+
+    <div class="card">
+      <div class="name">Hakan Ali Tuncay</div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  ✶ Aile bağları yıldızlar gibi nesiller boyu sürer ✶
+</footer>
+
+</body>
+</html>
