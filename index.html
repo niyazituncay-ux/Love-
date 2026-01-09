@@ -1,137 +1,230 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tuncay Ailesi Soy Ağacı</title>
 
   <style>
+    :root{
+      --bg1:#1f4d4d;
+      --bg2:#081818;
+      --ivory:#f5efe1;
+      --gold:#d4af37;
+      --card: rgba(245,239,225,0.10);
+      --card2: rgba(245,239,225,0.14);
+      --line: rgba(212,175,55,0.85);
+      --shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background: linear-gradient(to bottom, #1f4d4d, #081818);
-      color:#f5efe1;
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      background: linear-gradient(to bottom, var(--bg1), var(--bg2));
+      color: var(--ivory);
     }
 
+    header{
+      padding: 26px 14px 16px;
+      text-align:center;
+    }
     h1{
-      text-align:center;
-      color:#d4af37;
-      letter-spacing:2px;
-      margin:30px 10px 50px;
+      margin:0;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      font-size: clamp(20px, 4.8vw, 32px);
+    }
+    .subtitle{
+      margin-top: 8px;
+      opacity: .85;
+      font-size: 13px;
     }
 
-    /* Allgemeine Struktur */
-    .tree{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:60px;
-      padding-bottom:80px;
-    }
-
-    .level{
-      display:flex;
-      justify-content:center;
-      gap:40px;
-      flex-wrap:wrap;
-      position:relative;
-    }
-
-    /* Karten */
+    /* Cards */
     .card{
-      background: rgba(245,239,225,0.1);
-      border:1px solid rgba(212,175,55,0.6);
-      border-radius:16px;
-      padding:14px 18px;
-      min-width:220px;
-      text-align:center;
-      box-shadow:0 12px 30px rgba(0,0,0,0.35);
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border:1px solid rgba(212,175,55,0.55);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
       backdrop-filter: blur(8px);
-      position:relative;
+      text-align:center;
+      width: 100%;
+      max-width: 520px; /* iPhone friendly */
+      margin: 0 auto;
+      position: relative;
+    }
+    .card::before{
+      content:"✶";
+      position:absolute;
+      top:-12px;
+      left:50%;
+      transform:translateX(-50%);
+      color: var(--gold);
+      font-size: 18px;
+      background: rgba(8,24,24,0.95);
+      padding: 0 6px;
+      border-radius: 10px;
     }
 
     .name{
-      font-weight:700;
-      font-size:15px;
+      font-weight: 800;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+    .small{
+      margin-top: 6px;
+      font-size: 13px;
+      opacity: .88;
+      line-height: 1.35;
     }
 
-    /* Ehepaar */
+    /* Layout: "Flow" / "River" */
+    .wrap{
+      padding: 10px 12px 70px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Parent couple in one line */
     .couple{
       display:flex;
-      align-items:center;
-      gap:16px;
+      gap: 12px;
+      align-items: stretch;
+      justify-content: center;
+      flex-wrap: nowrap;
     }
-
+    .couple .card{ max-width: 330px; }
     .dash{
-      font-size:26px;
-      color:#d4af37;
-      font-weight:300;
+      display:grid;
+      place-items:center;
+      color: var(--gold);
+      font-size: 26px;
+      padding: 0 2px;
+      user-select:none;
     }
 
-    /* Verbindungslinien */
-    .vertical-line{
-      width:2px;
-      height:40px;
-      background:#d4af37;
-      margin:0 auto;
+    /* Trunk line from parents to children */
+    .trunk{
+      width: 2px;
+      height: 28px;
+      background: var(--line);
+      margin: 14px auto;
+      border-radius: 999px;
     }
 
-    .children{
+    /* Children sections (same generation) */
+    .children-sections{
       display:flex;
-      gap:40px;
-      flex-wrap:wrap;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .section{
+      position: relative;
+      padding-left: 18px; /* space for vertical spine */
+    }
+
+    /* Left spine line for each section */
+    .section::before{
+      content:"";
+      position:absolute;
+      left: 6px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(212,175,55,0.35);
+      border-radius: 999px;
+    }
+
+    /* Connector dot */
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      position:absolute;
+      left: 2px;
+      top: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    }
+
+    /* Child header line (generation) */
+    .gen-label{
+      font-size: 12px;
+      opacity: .75;
+      margin: 0 0 8px 0;
+      letter-spacing: .4px;
+    }
+
+    /* Child couple row (child — spouse) */
+    .child-couple{
+      display:flex;
+      align-items: stretch;
       justify-content:center;
-      position:relative;
+      gap: 10px;
+      flex-wrap: nowrap;
+    }
+    .child-couple .card{
+      max-width: 330px;
+    }
+    .child-couple .dash{
+      font-size: 22px;
     }
 
-    .children::before{
+    /* Kids under a child */
+    .kids{
+      margin-top: 10px;
+      padding-left: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .kid-line{
+      position: relative;
+      padding-left: 14px;
+    }
+    .kid-line::before{
       content:"";
       position:absolute;
-      top:-20px;
-      left:0;
-      right:0;
-      height:2px;
-      background:#d4af37;
-      margin:auto;
-      width:80%;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(212,175,55,0.35);
+      border-radius: 999px;
     }
-
-    .child{
-      position:relative;
-    }
-
-    .child::before{
-      content:"";
-      position:absolute;
-      top:-20px;
-      left:50%;
-      transform:translateX(-50%);
-      width:2px;
-      height:20px;
-      background:#d4af37;
+    .kid{
+      max-width: 520px;
     }
 
     footer{
       text-align:center;
-      font-size:12px;
-      opacity:.6;
-      margin-top:40px;
+      font-size: 12px;
+      opacity: .6;
+      padding: 18px 12px 34px;
     }
 
-    @media (max-width:600px){
-      .children::before{ width:90%; }
+    /* iPhone fit: keep things visible, no horizontal overflow */
+    @media (max-width: 420px){
+      .couple{ gap: 10px; }
+      .dash{ font-size: 22px; }
+      .name{ font-size: 14.5px; }
+      .card{ padding: 11px 12px; }
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <h1>Tuncay Ailesi Soy Ağacı</h1>
+    <div class="subtitle">Nesiller, bir nehir gibi birbirine akar ✶</div>
+  </header>
 
-<h1>Tuncay Ailesi Soy Ağacı</h1>
-
-<div class="tree">
-
-  <!-- EHEPAAR -->
-  <div class="level">
+  <main class="wrap">
+    <!-- Parents -->
     <div class="couple">
       <div class="card">
         <div class="name">Hasan Orhan Tuncay</div>
@@ -141,82 +234,90 @@
         <div class="name">Neriman Tuncay</div>
       </div>
     </div>
-  </div>
 
-  <div class="vertical-line"></div>
+    <div class="trunk"></div>
 
-  <!-- KINDER -->
-  <div class="level">
-    <div class="children">
+    <!-- Children (same generation, each as a section) -->
+    <div class="children-sections">
 
-      <!-- Niyazi -->
-      <div class="child">
-        <div class="card">
-          <div class="name">Niyazi Tuncay</div>
-          <div style="margin-top:6px;font-size:13px;opacity:.85;">
-            Eşi: Derya Tuncay
+      <!-- 1) Niyazi -->
+      <section class="section">
+        <span class="dot" aria-hidden="true"></span>
+        <p class="gen-label">1. Nesil Çocuk</p>
+
+        <div class="child-couple">
+          <div class="card">
+            <div class="name">Niyazi Tuncay</div>
+          </div>
+          <div class="dash">—</div>
+          <div class="card">
+            <div class="name">Derya Tuncay</div>
+            <div class="small">Eşi</div>
           </div>
         </div>
 
-        <div class="vertical-line"></div>
-
-        <div class="children">
-          <div class="child">
-            <div class="card">
+        <div class="kids">
+          <div class="kid-line">
+            <div class="card kid">
               <div class="name">Fatih Eren Tuncay</div>
             </div>
           </div>
-
-          <div class="child">
-            <div class="card">
+          <div class="kid-line">
+            <div class="card kid">
               <div class="name">Asya Tuncay</div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Ülkü -->
-      <div class="child">
-        <div class="card">
-          <div class="name">Ülkü Efe</div>
-          <div style="margin-top:6px;font-size:13px;opacity:.85;">
-            Eşi: Ertan Efe
+      <!-- 2) Ülkü -->
+      <section class="section">
+        <span class="dot" aria-hidden="true"></span>
+        <p class="gen-label">1. Nesil Çocuk</p>
+
+        <div class="child-couple">
+          <div class="card">
+            <div class="name">Ülkü Efe</div>
+          </div>
+          <div class="dash">—</div>
+          <div class="card">
+            <div class="name">Ertan Efe</div>
+            <div class="small">Eşi</div>
           </div>
         </div>
 
-        <div class="vertical-line"></div>
-
-        <div class="children">
-          <div class="child">
-            <div class="card">
+        <div class="kids">
+          <div class="kid-line">
+            <div class="card kid">
               <div class="name">Hamza Ali Efe</div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Ur -->
-      <div class="child">
+      <!-- 3) Uğur -->
+      <section class="section">
+        <span class="dot" aria-hidden="true"></span>
+        <p class="gen-label">1. Nesil Çocuk</p>
+
         <div class="card">
-          <div class="name">Ugur Tuncay</div>
+          <div class="name">Uğur Tuncay</div>
         </div>
-      </div>
+      </section>
 
-      <!-- Hakan -->
-      <div class="child">
+      <!-- 4) Hakan Ali -->
+      <section class="section">
+        <span class="dot" aria-hidden="true"></span>
+        <p class="gen-label">1. Nesil Çocuk</p>
+
         <div class="card">
           <div class="name">Hakan Ali Tuncay</div>
         </div>
-      </div>
+      </section>
 
     </div>
-  </div>
+  </main>
 
-</div>
-
-<footer>
-  ✶ Nesiller, bir nehir gibi birbirine akar ✶
-</footer>
-
+  <footer>✶ Tuncay Ailesi Soy Ağacı ✶</footer>
 </body>
 </html>
