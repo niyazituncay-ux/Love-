@@ -13,39 +13,38 @@
       --gold:#d4af37;
       --card: rgba(245,239,225,0.10);
       --card2: rgba(245,239,225,0.14);
-      --line: rgba(212,175,55,0.85);
-      --shadow: 0 10px 24px rgba(0,0,0,0.32);
+      --line: rgba(212,175,55,0.55);
+      --shadow: 0 10px 22px rgba(0,0,0,0.30);
     }
-
     *{ box-sizing:border-box; }
     body{
       margin:0;
       font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
       background: linear-gradient(to bottom, var(--bg1), var(--bg2));
       color: var(--ivory);
-      overflow-x:hidden;
+      overflow:hidden; /* one-glance */
     }
 
     header{
-      padding: 20px 12px 12px;
+      padding: 12px 10px 10px;
       text-align:center;
       position: sticky;
       top: 0;
       backdrop-filter: blur(10px);
-      background: rgba(8,24,24,0.65);
-      border-bottom: 1px solid rgba(212,175,55,0.22);
-      z-index: 10;
+      background: rgba(8,24,24,0.72);
+      border-bottom: 1px solid rgba(212,175,55,0.20);
+      z-index: 20;
     }
     h1{
       margin:0;
       color: var(--gold);
-      letter-spacing: 1.1px;
-      font-size: clamp(18px, 4.6vw, 28px);
+      letter-spacing: .9px;
+      font-size: 17px;
     }
     .meta{
-      margin-top: 10px;
+      margin-top: 8px;
       display:flex;
-      gap:10px;
+      gap:8px;
       justify-content:center;
       flex-wrap:wrap;
       align-items:center;
@@ -53,171 +52,23 @@
     .pill{
       border: 1px solid rgba(212,175,55,0.55);
       background: rgba(0,0,0,0.18);
-      padding: 6px 10px;
+      padding: 5px 9px;
       border-radius: 999px;
-      font-size: 12px;
-    }
-
-    .wrap{
-      padding: 10px 10px 72px;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
-    /* Card */
-    .card{
-      background: linear-gradient(180deg, var(--card2), var(--card));
-      border:1px solid rgba(212,175,55,0.55);
-      border-radius: 14px;
-      padding: 10px 12px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-      text-align:center;
-      width: 100%;
-      max-width: 560px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .card::before{
-      content:"✶";
-      position:absolute;
-      top:-11px;
-      left:50%;
-      transform:translateX(-50%);
-      color: var(--gold);
-      font-size: 16px;
-      background: rgba(8,24,24,0.95);
-      padding: 0 6px;
-      border-radius: 10px;
-    }
-    .name{
-      font-weight: 800;
-      font-size: 14px;
-      line-height: 1.25;
-      word-break: break-word;
-    }
-    .small{
-      margin-top: 6px;
-      font-size: 12px;
-      opacity: .88;
-      line-height: 1.35;
-      word-break: break-word;
-    }
-
-    /* Couple row */
-    .couple{
-      display:flex;
-      gap: 10px;
-      align-items: stretch;
-      justify-content: center;
-      flex-wrap: nowrap;
-    }
-    .couple .card{ max-width: 360px; }
-    .dash{
-      display:grid;
-      place-items:center;
-      color: var(--gold);
-      font-size: 20px;
-      padding: 0 2px;
-      user-select:none;
-    }
-
-    .trunk{
-      width: 2px;
-      height: 22px;
-      background: var(--line);
-      margin: 12px auto;
-      border-radius: 999px;
-    }
-
-    /* Sections */
-    .children-sections{
-      display:flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .section{
-      position: relative;
-      padding-left: 16px;
-    }
-    .section::before{
-      content:"";
-      position:absolute;
-      left: 6px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: rgba(212,175,55,0.28);
-      border-radius: 999px;
-    }
-    .dot{
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--gold);
-      position:absolute;
-      left: 2px;
-      top: 14px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-    }
-
-    /* Collapsible blocks */
-    details{
-      border: 1px solid rgba(212,175,55,0.28);
-      border-radius: 14px;
-      background: rgba(0,0,0,0.12);
-      padding: 8px;
-    }
-    summary{
-      cursor:pointer;
-      list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      user-select:none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-
-    .sum-left{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      text-align:left;
-      min-width: 0;
-    }
-    .sum-title{
-      font-weight:800;
-      color: var(--ivory);
-      font-size: 13px;
-      overflow:hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 52vw;
-    }
-    .sum-sub{
       font-size: 11px;
-      opacity:.78;
+      user-select:none;
     }
-    .sum-right{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
     .btn{
       border:1px solid rgba(212,175,55,0.55);
       background: rgba(0,0,0,0.18);
       color: var(--ivory);
-      padding: 7px 10px;
-      border-radius: 12px;
+      padding: 6px 8px;
+      border-radius: 10px;
       cursor:pointer;
-      font-weight:800;
-      font-size: 12px;
+      font-weight:900;
+      font-size: 11px;
       line-height: 1;
       white-space: nowrap;
+      user-select:none;
     }
     .btn:hover{ background: rgba(245,239,225,0.10); }
     .btn.primary{
@@ -229,42 +80,95 @@
       background: rgba(255,120,120,0.10);
     }
 
-    /* nested children list */
-    .kids{
-      margin-top: 10px;
-      padding-left: 10px;
-      display:flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .kid-line{
+    /* Viewport: fit-to-screen stage */
+    .viewport{
+      height: calc(100vh - 70px);
+      padding: 10px;
+      overflow: hidden;
       position: relative;
-      padding-left: 14px;
+      touch-action: manipulation;
     }
-    .kid-line::before{
-      content:"";
+    .stage{
+      transform-origin: top left;
+      display:inline-block;
+      position: relative;
+    }
+
+    /* SVG lines */
+    #lines{
       position:absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: rgba(212,175,55,0.24);
-      border-radius: 999px;
+      inset:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index: 0;
     }
 
-    footer{
+    /* Nodes layer */
+    #nodes{
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Node style (compact) */
+    .node{
+      position:absolute;
+      width: 190px;          /* kleiner */
+      padding: 8px 9px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border: 1px solid rgba(212,175,55,0.55);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
       text-align:center;
+    }
+    .node::before{
+      content:"✶";
+      position:absolute;
+      top:-10px;
+      left:50%;
+      transform:translateX(-50%);
+      color: var(--gold);
+      font-size: 14px;
+      background: rgba(8,24,24,0.95);
+      padding: 0 6px;
+      border-radius: 10px;
+    }
+    .name{
+      font-weight: 950;
       font-size: 12px;
-      opacity: .6;
-      padding: 18px 12px 36px;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+    .sub{
+      margin-top: 4px;
+      font-size: 10.5px;
+      opacity: .88;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+    .actions{
+      margin-top: 7px;
+      display:flex;
+      justify-content:center;
+      gap:6px;
+      flex-wrap:wrap;
     }
 
-    @media (max-width: 420px){
-      .dash{ font-size: 18px; }
-      .name{ font-size: 13.5px; }
-      .card{ padding: 9px 10px; }
-      .wrap{ padding-left: 8px; padding-right: 8px; }
-      .sum-title{ max-width: 44vw; }
+    .hint{
+      position:absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 11px;
+      opacity: .7;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(212,175,55,0.25);
+      padding: 6px 8px;
+      border-radius: 10px;
+      backdrop-filter: blur(8px);
+      user-select:none;
     }
   </style>
 </head>
@@ -274,23 +178,27 @@
     <h1>Tuncay Ailesi Soy Ağacı (Almanya)</h1>
     <div class="meta">
       <span class="pill" id="countPill">Toplam üye sayısı: …</span>
+      <button class="btn" id="fitBtn" type="button">Ekrana Sığdır</button>
       <button class="btn primary" id="resetBtn" type="button">Bu cihazda kaydı sıfırla</button>
     </div>
   </header>
 
-  <main class="wrap" id="app"></main>
-
-  <footer>✶ Her yerde kişi / eş / çocuk / ebeveyn ekleyebilirsin ✶</footer>
+  <div class="viewport" id="viewport">
+    <div class="stage" id="stage">
+      <svg id="lines"></svg>
+      <div id="nodes"></div>
+    </div>
+    <div class="hint">İpucu: “Ekrana Sığdır” ile tamamı tek bakışta.</div>
+  </div>
 
   <script>
-    // ------------------ DEFAULT DATA (DÜZELTİLMİŞ) ------------------
+    // ------------------ DATA (DÜZELTİLMİŞ) ------------------
     const DEFAULT_TREE = {
       id: "root",
       person: "Niyazi Tuncay",
       spouse: "Elmas Tuncay",
       note: "",
       children: [
-        // 1) Ayşegül
         {
           id: "ays",
           person: "Ayşegül Tuncay",
@@ -320,8 +228,6 @@
             }
           ]
         },
-
-        // 2) Hüseyin
         {
           id: "hus",
           person: "Hüseyin Ayhan Tuncay",
@@ -356,8 +262,6 @@
             }
           ]
         },
-
-        // 3) Hasan Orhan (önceki ağaç buraya alındı)
         {
           id: "has",
           person: "Hasan Orhan Tuncay",
@@ -390,17 +294,9 @@
               note: "",
               children: []
             },
-            {
-              id: "hakan",
-              person: "Hakan Ali Tuncay",
-              spouse: "",
-              note: "",
-              children: []
-            }
+            { id: "hakan", person: "Hakan Ali Tuncay", spouse: "", note: "", children: [] }
           ]
         },
-
-        // 4) Sevda (manuel alanlar bırakıldı)
         {
           id: "sev",
           person: "Sevda Tuncay",
@@ -437,8 +333,6 @@
             }
           ]
         },
-
-        // 5) Cemal (düzeltildi)
         {
           id: "cemal",
           person: "Cemal Tuncay",
@@ -448,8 +342,6 @@
             { id: "lara", person: "Lara Tuncay", spouse: "", note: "", children: [] }
           ]
         },
-
-        // 6) Fatih (düzeltildi)
         {
           id: "fatih",
           person: "Fatih Tuncay",
@@ -465,25 +357,18 @@
       ]
     };
 
-    // ------------------ STORAGE ------------------
-    const STORAGE_KEY = "tuncay_family_de_v2_full";
+    const STORAGE_KEY = "tuncay_family_de_generations_v1";
 
     function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
-
     function loadTree(){
       try{
         const raw = localStorage.getItem(STORAGE_KEY);
         if(!raw) return clone(DEFAULT_TREE);
         return JSON.parse(raw);
-      }catch(e){
-        return clone(DEFAULT_TREE);
-      }
+      }catch(e){ return clone(DEFAULT_TREE); }
     }
-    function saveTree(tree){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(tree));
-    }
+    function saveTree(tree){ localStorage.setItem(STORAGE_KEY, JSON.stringify(tree)); }
 
-    // ------------------ HELPERS ------------------
     function isRealName(name){
       if(!name) return false;
       const t = String(name).trim();
@@ -492,10 +377,10 @@
       return true;
     }
     function countMembers(node){
-      let c = 0;
+      let c=0;
       if(isRealName(node.person)) c++;
       if(isRealName(node.spouse)) c++;
-      for(const ch of (node.children || [])) c += countMembers(ch);
+      for(const ch of (node.children||[])) c += countMembers(ch);
       return c;
     }
 
@@ -507,64 +392,21 @@
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
     }
+    function newId(){ return "id_" + Math.random().toString(16).slice(2); }
 
-    function newId(){
-      return "id_" + Math.random().toString(16).slice(2);
-    }
-
-    // Find node + parent
     function findNodeAndParent(node, id, parent=null){
       if(node.id === id) return { node, parent };
-      for(const ch of (node.children || [])){
+      for(const ch of (node.children||[])){
         const found = findNodeAndParent(ch, id, node);
         if(found) return found;
       }
       return null;
     }
 
-    function nodeSummary(node){
-      const p = (node.person || "").trim() || "(isimsiz)";
-      const s = (node.spouse || "").trim();
-      const n = (node.note || "").trim();
-      let line = p;
-      if(s) line += " — " + s;
-      if(n) line += " · " + n;
-      return line;
-    }
-
-    function renderCoupleHTML(person, spouse, note){
-      const hasSpouse = Boolean((spouse || "").trim());
-      const hasNote = Boolean((note || "").trim());
-
-      if(hasSpouse){
-        return `
-          <div class="couple">
-            <div class="card">
-              <div class="name">${escapeHtml(person || "")}</div>
-              ${hasNote ? `<div class="small">${escapeHtml(note)}</div>` : ""}
-            </div>
-            <div class="dash">—</div>
-            <div class="card">
-              <div class="name">${escapeHtml(spouse || "")}</div>
-              <div class="small">Eşi</div>
-            </div>
-          </div>
-        `;
-      }
-
-      return `
-        <div class="card">
-          <div class="name">${escapeHtml(person || "")}</div>
-          ${hasNote ? `<div class="small">${escapeHtml(note)}</div>` : ""}
-        </div>
-      `;
-    }
-
-    // ------------------ ACTIONS (EVERYWHERE) ------------------
+    // -------- Actions (everywhere) --------
     function editNode(tree, id){
       const found = findNodeAndParent(tree, id);
       if(!found) return;
-
       const node = found.node;
 
       const p = prompt("Kişi adı (person):", node.person ?? "");
@@ -579,7 +421,6 @@
       node.person = p;
       node.spouse = s;
       node.note = n;
-
       saveTree(tree);
       render(tree);
     }
@@ -600,29 +441,18 @@
     function addChild(tree, parentId){
       const found = findNodeAndParent(tree, parentId);
       if(!found) return;
-
       const parent = found.node;
-      parent.children = parent.children || [];
-      parent.children.push({
-        id: newId(),
-        person: "— Yeni kişi (manuel)",
-        spouse: "",
-        note: "",
-        children: []
-      });
 
+      parent.children = parent.children || [];
+      parent.children.push({ id:newId(), person:"— Yeni kişi (manuel)", spouse:"", note:"", children:[] });
       saveTree(tree);
       render(tree);
     }
 
-    // Add parents ABOVE a node anywhere:
-    // Creates a new parent node and replaces target node in its parent's children list.
-    // New parents -> children: [targetNode]
     function addParentsAbove(tree, id){
       const found = findNodeAndParent(tree, id);
       if(!found) return;
 
-      // if this is root, make new root
       const target = found.node;
       const parent = found.parent;
 
@@ -632,24 +462,14 @@
       const parentSpouse = prompt("Diğer ebeveyn / eş adı (opsiyonel):", "");
       if(parentSpouse === null) return;
 
-      const wrapper = {
-        id: newId(),
-        person: parentPerson,
-        spouse: parentSpouse,
-        note: "",
-        children: [ target ]
-      };
+      const wrapper = { id:newId(), person:parentPerson, spouse:parentSpouse, note:"", children:[target] };
 
       if(!parent){
-        // target is root -> wrapper becomes new root
         tree = wrapper;
       }else{
-        // replace target in parent's children
-        parent.children = parent.children || [];
-        const idx = parent.children.findIndex(x => x.id === target.id);
+        const idx = (parent.children||[]).findIndex(x => x.id === target.id);
         if(idx >= 0) parent.children[idx] = wrapper;
       }
-
       saveTree(tree);
       render(tree);
     }
@@ -657,110 +477,238 @@
     function deleteNode(tree, id){
       const found = findNodeAndParent(tree, id);
       if(!found) return;
-
-      const parent = found.parent;
-      const node = found.node;
-
-      if(!parent){
-        alert("Kök kişi silinemez. (İstersen ‘Ebeveyn ekle’ ile üstüne yeni kök koyabilirsin.)");
+      if(!found.parent){
+        alert("Kök kişi silinemez.");
         return;
       }
-
-      const ok = confirm(`Silinsin mi?\n${nodeSummary(node)}\n\nBu kişinin tüm alt dalları da silinir.`);
+      const ok = confirm("Silinsin mi? (Alt dallar da silinir)");
       if(!ok) return;
-
-      parent.children = (parent.children || []).filter(ch => ch.id !== id);
-
+      found.parent.children = (found.parent.children||[]).filter(ch => ch.id !== id);
       saveTree(tree);
       render(tree);
     }
 
-    // ------------------ RENDER ------------------
-    function renderNode(node, label){
-      const hasChildren = (node.children || []).length > 0;
+    // -------- Layout: Generations (columns) --------
+    const NODE_W = 190, NODE_H = 86; // approx; we'll measure after render too
+    const COL_GAP = 110;
+    const ROW_GAP = 30;
+    const PAD = 20;
 
+    function label(node){
+      let t = (node.person||"").trim() || "(isimsiz)";
+      if((node.spouse||"").trim()) t += " — " + node.spouse.trim();
+      return t;
+    }
+
+    function collectByDepth(root){
+      const cols = [];
+      function walk(n, d){
+        if(!cols[d]) cols[d] = [];
+        cols[d].push(n);
+        for(const ch of (n.children||[])) walk(ch, d+1);
+      }
+      walk(root, 0);
+      return cols;
+    }
+
+    function layoutPositions(root){
+      // Simple, stable: place nodes column by column, top-down
+      // Then, try to center parents over children by one refinement pass.
+      const cols = collectByDepth(root);
+
+      const pos = new Map(); // id -> {x,y,w,h}
+      // initial placement
+      for(let d=0; d<cols.length; d++){
+        const x = PAD + d*(NODE_W + COL_GAP);
+        for(let i=0; i<cols[d].length; i++){
+          const y = PAD + i*(NODE_H + ROW_GAP);
+          pos.set(cols[d][i].id, {x,y,w:NODE_W,h:NODE_H});
+        }
+      }
+
+      // refinement: center each parent to its children average y
+      function refine(n){
+        const kids = n.children||[];
+        if(kids.length){
+          kids.forEach(refine);
+          const ys = kids.map(k => (pos.get(k.id).y + NODE_H/2));
+          const avg = ys.reduce((a,b)=>a+b,0)/ys.length;
+          const p = pos.get(n.id);
+          p.y = avg - NODE_H/2;
+        }
+      }
+      refine(root);
+
+      // After refine, prevent overlaps inside each column (simple sweep)
+      for(let d=0; d<cols.length; d++){
+        const ids = cols[d].map(n => n.id);
+        ids.sort((a,b)=>pos.get(a).y - pos.get(b).y);
+
+        let currentY = PAD;
+        for(const id of ids){
+          const p = pos.get(id);
+          if(p.y < currentY) p.y = currentY;
+          currentY = p.y + NODE_H + ROW_GAP;
+        }
+      }
+
+      // compute bounds
+      let maxX=0, maxY=0;
+      for(const v of pos.values()){
+        maxX = Math.max(maxX, v.x + v.w);
+        maxY = Math.max(maxY, v.y + v.h);
+      }
+      return {pos, width:maxX+PAD, height:maxY+PAD};
+    }
+
+    function drawLines(tree, pos, width, height){
+      const svg = document.getElementById("lines");
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      svg.setAttribute("width", width);
+      svg.setAttribute("height", height);
+      svg.innerHTML = "";
+
+      // defs (soft glow)
+      svg.insertAdjacentHTML("beforeend", `
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.2" result="blur"></feGaussianBlur>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+      `);
+
+      function line(x1,y1,x2,y2){
+        const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+        const midX = (x1+x2)/2;
+        // smooth cubic
+        const d = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
+        path.setAttribute("d", d);
+        path.setAttribute("fill","none");
+        path.setAttribute("stroke", "rgba(212,175,55,0.50)");
+        path.setAttribute("stroke-width","2");
+        path.setAttribute("filter","url(#glow)");
+        path.setAttribute("stroke-linecap","round");
+        svg.appendChild(path);
+      }
+
+      function walk(n){
+        const p = pos.get(n.id);
+        const x1 = p.x + p.w;
+        const y1 = p.y + p.h/2;
+
+        for(const ch of (n.children||[])){
+          const c = pos.get(ch.id);
+          const x2 = c.x;
+          const y2 = c.y + c.h/2;
+          line(x1, y1, x2, y2);
+          walk(ch);
+        }
+      }
+      walk(tree);
+    }
+
+    // -------- Render nodes --------
+    function nodeHTML(node){
       return `
-        <section class="section">
-          <span class="dot" aria-hidden="true"></span>
+        <div class="node" data-node="${node.id}">
+          <div class="name">${escapeHtml(label(node))}</div>
+          ${node.note ? `<div class="sub">${escapeHtml(node.note)}</div>` : ""}
 
-          <details open>
-            <summary>
-              <div class="sum-left">
-                <div class="sum-title">${escapeHtml(nodeSummary(node))}</div>
-                <div class="sum-sub">${escapeHtml(label)} · ${hasChildren ? `${node.children.length} çocuk/alt dal` : "Alt dal yok"}</div>
-              </div>
-              <div class="sum-right">
-                <button class="btn" type="button" data-action="edit" data-id="${node.id}">✎ Düzenle</button>
-                <button class="btn" type="button" data-action="spouse" data-id="${node.id}">+ Eş</button>
-                <button class="btn primary" type="button" data-action="add" data-id="${node.id}">+ Çocuk</button>
-                <button class="btn" type="button" data-action="parents" data-id="${node.id}">+ Ebeveyn</button>
-                <button class="btn danger" type="button" data-action="del" data-id="${node.id}">🗑 Sil</button>
-              </div>
-            </summary>
-
-            <div style="padding:10px 6px 6px;">
-              ${renderCoupleHTML(node.person, node.spouse, node.note)}
-
-              ${hasChildren ? `
-                <div class="kids">
-                  ${(node.children || []).map(ch => `
-                    <div class="kid-line">
-                      ${renderNode(ch, "Alt Nesil")}
-                    </div>
-                  `).join("")}
-                </div>
-              ` : ""}
-            </div>
-          </details>
-        </section>
+          <div class="actions">
+            <button class="btn" data-action="edit" data-id="${node.id}" type="button">✎</button>
+            <button class="btn" data-action="spouse" data-id="${node.id}" type="button">+Eş</button>
+            <button class="btn primary" data-action="add" data-id="${node.id}" type="button">+Çocuk</button>
+            <button class="btn" data-action="parents" data-id="${node.id}" type="button">+Ebeveyn</button>
+            <button class="btn danger" data-action="del" data-id="${node.id}" type="button">🗑</button>
+          </div>
+        </div>
       `;
+    }
+
+    function flatten(root){
+      const arr = [];
+      (function walk(n){
+        arr.push(n);
+        for(const ch of (n.children||[])) walk(ch);
+      })(root);
+      return arr;
     }
 
     function render(tree){
-      const app = document.getElementById("app");
-      const count = countMembers(tree);
-      document.getElementById("countPill").textContent = `Toplam üye sayısı: ${count}`;
+      document.getElementById("countPill").textContent = `Toplam üye sayısı: ${countMembers(tree)}`;
 
-      // Root always visible
-      app.innerHTML = `
-        ${renderCoupleHTML(tree.person, tree.spouse, tree.note)}
-        <div class="trunk"></div>
+      const {pos, width, height} = layoutPositions(tree);
 
-        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin: 0 0 10px;">
-          <button class="btn" type="button" data-action="edit" data-id="${tree.id}">✎ Düzenle (Kök)</button>
-          <button class="btn" type="button" data-action="spouse" data-id="${tree.id}">+ Eş (Kök)</button>
-          <button class="btn primary" type="button" data-action="add" data-id="${tree.id}">+ Çocuk (Kök)</button>
-          <button class="btn" type="button" data-action="parents" data-id="${tree.id}">+ Ebeveyn (Kök)</button>
-        </div>
+      const nodes = document.getElementById("nodes");
+      nodes.style.width = width + "px";
+      nodes.style.height = height + "px";
 
-        <div class="children-sections">
-          ${(tree.children || []).map(ch => renderNode(ch, "1. Nesil Çocuk")).join("")}
-        </div>
-      `;
+      const all = flatten(tree);
+      nodes.innerHTML = all.map(nodeHTML).join("");
 
-      // bind buttons
-      app.querySelectorAll("button[data-action]").forEach(btn => {
+      // position nodes
+      nodes.querySelectorAll(".node").forEach(el => {
+        const id = el.getAttribute("data-node");
+        const p = pos.get(id);
+        el.style.left = p.x + "px";
+        el.style.top = p.y + "px";
+      });
+
+      // draw lines behind
+      drawLines(tree, pos, width, height);
+
+      // bind actions
+      nodes.querySelectorAll("button[data-action]").forEach(btn => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-
           const action = btn.dataset.action;
           const id = btn.dataset.id;
-
-          let currentTree = loadTree();
-
-          if(action === "edit") editNode(currentTree, id);
-          if(action === "spouse") addSpouse(currentTree, id);
-          if(action === "add") addChild(currentTree, id);
-          if(action === "parents") addParentsAbove(currentTree, id);
-          if(action === "del") deleteNode(currentTree, id);
+          let t = loadTree();
+          if(action === "edit") editNode(t, id);
+          if(action === "spouse") addSpouse(t, id);
+          if(action === "add") addChild(t, id);
+          if(action === "parents") addParentsAbove(t, id);
+          if(action === "del") deleteNode(t, id);
         });
       });
+
+      requestAnimationFrame(() => fitToScreen());
     }
 
-    // ------------------ INIT ------------------
+    // -------- Auto-Fit (one glance) --------
+    function fitToScreen(){
+      const viewport = document.getElementById("viewport");
+      const stage = document.getElementById("stage");
+
+      stage.style.transform = "scale(1)";
+      stage.style.transformOrigin = "top left";
+
+      const vW = viewport.clientWidth;
+      const vH = viewport.clientHeight;
+
+      const rect = stage.getBoundingClientRect();
+      const cW = rect.width;
+      const cH = rect.height;
+
+      const pad = 8;
+      let s = Math.min((vW - pad)/cW, (vH - pad)/cH);
+      s = Math.min(s, 1);
+      s = Math.max(s, 0.12); // allow very small fit if many members
+
+      stage.style.transform = `scale(${s})`;
+    }
+
+    // -------- Init & Controls --------
     let TREE = loadTree();
     render(TREE);
+
+    document.getElementById("fitBtn").addEventListener("click", () => fitToScreen());
+    window.addEventListener("resize", () => fitToScreen());
 
     document.getElementById("resetBtn").addEventListener("click", () => {
       if(confirm("Bu cihazdaki kaydedilen değişiklikler sıfırlansın mı?")){
